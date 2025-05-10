@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Simplified S3 upload script
+# Usage: ./put-object <bucket> <s3-key> <local-path> [profile]
+
+# Set defaults
+
+BUCKET="$1"
+KEY="$2"
+LOCAL_PATH="$3"
+REGION="$4"
+PROFILE="${5:-default}"
+
+
+# Basic validation
+if [ $# -lt 3 ]; then
+    echo "Usage: $0 <bucket> <s3-key> <local-path> [profile]"
+    echo "Example: $0 my-bucket images/logo.png ./logo.png"
+    exit 1
+fi
+
+# Check if local path exists
+if [ ! -e "$LOCAL_PATH" ]; then
+    echo "Error: Local path $LOCAL_PATH not found!"
+    exit 1
+fi
+
+# Create bucket if not exists
+if ! aws s3api head-bucket --bucket "$BUCKET" --profile "$PROFILE" 2>/dev/null; then
+    echo "Creating bucket $BUCKET..."
+    aws s3api create-bucket \
+            --bucket "$BUCKET" \
+            --region "$REGION" \
+            --create-bucket-configuration LocationConstraint="$REGION" \
+            --profile "$PROFILE"
+fi
+
+# Upload file/directory
+if [ -f "$LOCAL_PATH" ]; then
+    aws s3 cp "$LOCAL_PATH" "s3://$BUCKET/$KEY" --profile "$PROFILE"
+elif [ -d "$LOCAL_PATH" ]; then
+    aws s3 sync "$LOCAL_PATH" "s3://$BUCKET/$KEY/" --profile "$PROFILE"
+else
+    echo "Error: $LOCAL_PATH is neither file nor directory"
+    exit 1
+fi
+
+echo "Upload completed to s3://$BUCKET/$KEY"
