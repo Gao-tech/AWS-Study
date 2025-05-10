@@ -1,0 +1,15 @@
+#! /bin/bash
+
+if [ -z "$1" ]; then
+  echo "list bucket: defaut profile "
+  aws s3api list-buckets --query Buckets[].Name
+  
+  exit 1
+fi
+
+PROFILE_NAME=$1
+
+echo "list bucket with profile: $PROFILE_NAME"
+
+aws s3api list-buckets --query Buckets[].Name \
+  --profile "$PROFILE_NAME" 
