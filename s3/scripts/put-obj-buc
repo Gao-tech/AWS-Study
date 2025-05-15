@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Simplified S3 upload script
+# Usage: ./put-object <bucket> <s3-key> <local-path> [profile]
+
+if [ -z "$1" ]; then
+  echo "Usage: $0 <bucket-name>"
+  exit 1
+fi
+
+if [ -z "$2" ]; then
+  echo "Usage: $0 <file-name>"
+  exit 1
+fi
+
+BUCKET_NAME=$1
+FILE_NAME=$2
+
+
+echo "Putting object: $BUCKET_NAME"
+
+aws s3api put-object \
+  --bucket "$BUCKET_NAME" \
+  --key "$FILE_NAME" \
+  --body "$FILE_NAME" 
+   
+  
+   

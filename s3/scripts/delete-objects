@@ -1,36 +1,3 @@
-# #!/bin/bash
-
-# # Check if the bucket name argument is provided
-# if [ -z "$1" ]; then
-#   echo "Usage: $0 <bucket-name>"
-#   exit 1
-# fi
-# if [ -z "$2" ]; then
-#   echo "Usage: $0 <objects-names>"
-#   exit 1
-# fi
-# if [ -z "$3" ]; then
-#   echo "Usage: $0 <quiet>"
-#   exit 1
-# fi
-# BUCKET_NAME=$1
-# OBJECT=$2
-# QUIET=$3
-
-# echo "Deleting object: $OBJECT"
-
-# aws s3api delete-objects \
-#   --bucket "$BUCKET_NAME" \
-#   --delete "$(cat <<EOF
-# {
-#   "Objects": [
-#     { "Key": "$OBJECT" }
-#   ],
-#   "Quiet": $QUIET
-# }
-# EOF
-# )"
-
 #!/bin/bash
 
 # Check at least 3 arguments (bucket + at least 1 object + quiet)

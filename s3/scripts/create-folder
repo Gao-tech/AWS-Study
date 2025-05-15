@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Check if the bucket name argument is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <bucket-name>"
+  exit 1
+fi
+
+BUCKET_NAME=$1
+
+echo "Creating bucket: $BUCKET_NAME"
+
+aws s3api create-bucket \
+  --bucket "$BUCKET_NAME" \
+  --create-bucket-configuration LocationConstraint=eu-north-1 \
+  --query Location \
+  --output text

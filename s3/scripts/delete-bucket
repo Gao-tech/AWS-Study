@@ -12,3 +12,5 @@ echo "Deleting bucket: $BUCKET_NAME"
 
 aws s3api delete-bucket \
   --bucket "$BUCKET_NAME" 
+
+# aws s3 rb --force s3://"$BUCKET_NAME"  
