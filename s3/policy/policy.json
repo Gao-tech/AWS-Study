@@ -1,0 +1,26 @@
+{
+    "Statement": [
+       {
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": "arn:aws:iam::1525323:user/gekee"
+         },
+          "Action": [
+            "s3:GetObject",
+            "s3:ListBucket"
+          ],
+          "Resource":[
+            "arn:aws:s3:::bucket-policy-test-4321",
+            "arn:aws:s3:::bucket-policy-test-4321/*"
+        ]
+       },
+       {
+          "Effect": "Deny",
+          "Principal": {
+            "AWS": "arn:aws:iam::1525323:user/gekee"
+         },
+          "Action": "s3:GetObject",
+          "Resource": "arn:aws:s3:::bucket-policy-test-4321/MySecretFolder/*"
+       }
+    ]
+ }

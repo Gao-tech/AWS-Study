@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="sendPost()">Send POST</button>
+
+<script>
+function sendPost() {
+  fetch('https://ip85jpfmb9.execute-api.eu-north-1.amazonaws.com/production/hello4', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ message: 'Hello from index.html' })
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+}
+</script>
+
+</body>
+</html>

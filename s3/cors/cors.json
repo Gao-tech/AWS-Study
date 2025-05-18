@@ -1,0 +1,12 @@
+
+{
+  "CORSRules": [
+    {
+      "AllowedOrigins": ["https://ip85jpfmb9.execute-api.eu-north-1.amazonaws.com"],
+      "AllowedHeaders": ["*"],
+      "AllowedMethods": ["PUT", "POST", "DELETE"],
+      "MaxAgeSeconds": 3000,
+      "ExposeHeaders": ["x-amz-server-side-encryption"]
+    }
+  ]
+}
