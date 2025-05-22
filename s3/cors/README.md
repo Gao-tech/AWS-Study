@@ -32,7 +32,8 @@ aws s3 cp index.html s3://bucket-static-website-3333
 
 ## Applycors policy
 
-## cors
+
+## cors policy to s3
 
 ```
 aws s3api put-bucket-cors --bucket bucket-static-website-3333 --cors-configuration file://cors.json
